@@ -2,6 +2,15 @@
 
 El siguiente código Python define dos clases: `Libro` y `Biblioteca`, junto con algunas excepciones personalizadas y una función principal `main`.
 
+## Función `main()`
+
+La función `main()` permite al usuario interactuar con la biblioteca a través de un menú interactivo que incluye las siguientes opciones:
+
+1. Agregar libros
+2. Buscar libros por título
+3. Mostrar todos los libros en la biblioteca
+4. Salir del programa.
+
 ## Clase Libro
 
 La clase `Libro` tiene los siguientes atributos:
@@ -21,13 +30,3 @@ La clase `Biblioteca` administra una lista de libros. Tiene los siguientes méto
 ## Excepciones Personalizadas
 
 El código define dos excepciones personalizadas: `ErrorLibroSinTitulo` y `ErrorLibroSinAutor`, que se lanzan cuando se intenta agregar un libro sin título o sin autor, respectivamente.
-
-## Función Main
-
-La función `main()` es la entrada principal del programa. Permite al usuario interactuar con la biblioteca a través de un menú interactivo que incluye las siguientes opciones:
-1. Agregar libros
-2. Buscar libros por título
-3. Mostrar todos los libros en la biblioteca
-4. Salir del programa.
-
-El programa maneja posibles errores de entrada del usuario, como libros sin título o autor, y proporciona mensajes informativos al usuario en caso de errores.
