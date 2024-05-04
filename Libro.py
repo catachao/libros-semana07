@@ -1,16 +1,18 @@
 class Libro:
     def __init__(self, titulo, autor, año_publicacion):
+        if not titulo:
+            raise ErrorLibroSinTitulo
+        if not autor:
+            raise ErrorLibroSinAutor
         self.titulo = titulo
         self.autor = autor
-        self.año_publicacion = año_publicacion
+        self.año_publicacion = int(año_publicacion)
 
 class Biblioteca:
     def __init__(self):
         self.libros = []
 
     def agregar_libro(self, libro):
-        if not libro.titulo or not libro.autor:
-            raise ValueError("El libro debe tener un título y un autor.")
         self.libros.append(libro)
         print(f"Libro '{libro.titulo}' agregado a la biblioteca.")
 
@@ -18,7 +20,7 @@ class Biblioteca:
         for libro in self.libros:
             if libro.titulo.lower() == titulo.lower():
                 return libro
-        raise ValueError(f"No se encontró ningún libro con el título '{titulo}'.")
+        raise ValueError(f"No se encontró ningún libro con el título '{titulo.lower()}'.")
 
     def mostrar_libros(self):
         if not self.libros:
@@ -48,7 +50,7 @@ def main():
         print("1. Agregar libro")
         print("2. Buscar libro por título")
         print("3. Mostrar todos los libros")
-        print("4. Salir")
+        print("4. Salir del programa")
 
         opcion = input("Seleccione una opción: ")
 
@@ -58,24 +60,15 @@ def main():
                 autor = input("Ingrese el autor del libro: ")
                 año_publicacion = input("Ingrese el año de publicación del libro: ")
 
-                if not titulo:
-                    raise ErrorLibroSinTitulo
-                if not autor:
-                    raise ErrorLibroSinAutor
-
                 libro = Libro(titulo, autor, año_publicacion)
                 biblioteca.agregar_libro(libro)
-            except ErrorLibroSinTitulo as e:
-                print(e)
-            except ErrorLibroSinAutor as e:
-                print(e)
-            except ValueError as e:
+            except (ErrorLibroSinTitulo, ErrorLibroSinAutor) as e:
                 print(e)
 
         elif opcion == "2":
             titulo = input("Ingrese el título del libro a buscar: ")
             try:
-                libro_encontrado = biblioteca.buscar_libro(titulo)
+                libro_encontrado = biblioteca.buscar_libro(titulo.lower())  # Convertir a minúsculas
                 print(f"Libro encontrado: {libro_encontrado.titulo} (Autor: {libro_encontrado.autor}, Año: {libro_encontrado.año_publicacion})")
             except ValueError as e:
                 print(e)
