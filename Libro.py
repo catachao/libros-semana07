@@ -4,9 +4,21 @@ class Libro:
             raise ErrorLibroSinTitulo
         if not autor:
             raise ErrorLibroSinAutor
+
+        while True:
+            try:
+                self.año_publicacion = int(año_publicacion)
+                if self.año_publicacion < 0:
+                    raise ValueError("El año de publicación no puede ser negativo.")
+                break  # Salir del bucle si el año es válido
+            except ValueError:
+                print("Error: El año de publicación debe ser un número entero.")
+                año_publicacion = input("Ingrese el año de publicación nuevamente: ")
+
         self.titulo = titulo
         self.autor = autor
-        self.año_publicacion = int(año_publicacion)
+
+
 
 class Biblioteca:
     def __init__(self):
